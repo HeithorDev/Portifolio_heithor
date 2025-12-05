@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heithor Haber — Portfólio</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+
+    <script>
+      (function () {
+        var t = localStorage.getItem("theme") || "light";
+        var h = document.documentElement;
+        h.setAttribute("data-theme", t);
+        h.setAttribute("data-bs-theme", t);
+      })();
+    </script>
+
+    <style>
+      :root {
+        --bg-body: #f7fafc;
+        --text-color: #111827;
+        --section-bg: #ffffff;
+        --navbar-bg: rgba(255, 255, 255, 0.88);
+        --navbar-text: #111827;
+        --header-start: #ffffff;
+        --header-end: #f7fafc;
+        --footer-bg: #ffffff;
+        --footer-text: #6b7280;
+        --accent: #00e5ff;
+        --accent-hover: #72f5ff;
+        --accent-2: #ff3d81;
+        --card-bg: #ffffff;
+        --card-border: #e5e7eb;
+      }
+
+      [data-theme="dark"] {
+        --bg-body: #0b1220;
+        --text-color: #e5e7eb;
+        --section-bg: #0f172a;
+        --navbar-bg: rgba(0, 0, 0, 0.6);
+        --navbar-text: #e5e7eb;
+        --header-start: #000000;
+        --header-end: #0b1220;
+        --footer-bg: #0b1220;
+        --footer-text: #70819a;
+        --accent: #00e5ff;
+        --accent-hover: #72f5ff;
+        --accent-2: #ff3d81;
+        --card-bg: rgba(255, 255, 255, 0.06);
+        --card-border: rgba(255, 255, 255, 0.12);
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: radial-gradient(
+            1200px 600px at 10% 10%,
+            rgba(0, 229, 255, 0.08),
+            transparent
+          ),
+          radial-gradient(
+            800px 400px at 90% 20%,
+            rgba(255, 61, 129, 0.08),
+            transparent
+          ),
+          var(--bg-body);
+        color: var(--text-color);
+        position: relative;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(255, 255, 255, 0.08) 1px,
+          transparent 1px
+        );
+        background-size: 22px 22px;
+        opacity: 0.25;
+        pointer-events: none;
+      }
+
+      /* NAVBAR */
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--header-start),
+          var(--header-end)
+        );
+        color: #fff;
+        padding: 160px 0 140px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid var(--card-border);
+      }
+      header .shapes {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      header .shape {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 229, 255, 0.6),
+          rgba(255, 61, 129, 0.6)
+        );
+        filter: blur(28px);
+        animation: float 12s ease-in-out infinite;
+      }
+      header::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          var(--accent-2),
+          transparent
+        );
+        filter: blur(2px);
+        animation: scan 6s linear infinite;
+      }
+
+      header h1 {
+        font-size: 3.2rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        animation: fadeIn 1.2s ease;
+      }
+      [data-theme="light"] header h1 {
+        color: #111827;
+      }
+
+      header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        animation: fadeIn 1.6s ease;
+      }
+      [data-theme="light"] header p {
+        color: #374151;
+      }
+
+      .btn-acesso {
+        margin-top: 20px;
+        padding: 12px 28px;
+        font-size: 1rem;
+        border-radius: 30px;
+      }
+      .btn-outline-light {
+        border-color: rgba(255, 255, 255, 0.6);
+        color: #fff;
+      }
+      .btn-outline-light:hover {
+        background: #fff;
+        color: #0d6efd;
+      }
+      [data-theme="light"] .btn-outline-light {
+        border-color: #111827;
+        color: #111827;
+      }
+      [data-theme="light"] .btn-outline-light:hover {
+        background: #111827;
+        color: #fff;
+      }
+      [data-theme="light"] .btn-outline-secondary {
+        border-color: #111827;
+        color: #111827;
+      }
+      [data-theme="light"] .btn-outline-secondary:hover {
+        background: #111827;
+        color: #fff;
+      }
+
+      /* SOBRE MIM */
+      #sobre {
+        padding: 80px 0;
+        background: var(--section-bg);
+      }
+
+      #sobre h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 40px;
+        font-size: 2.4rem;
+      }
+
+      #sobre .foto-perfil {
+        width: 230px;
+        height: 230px;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Projeto GTECH */
+      #gtech {
+        padding: 80px 0;
+        background: var(--section-bg);
+      }
+
+      #gtech h2 {
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 40px;
+        font-size: 2.4rem;
+      }
+
+      #gtech .foto-perfil {
+        width: 250px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 50%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* CARROSSEL */
+      #projetos {
+        padding: 80px 0;
+      }
+
+      #projetos h2 {
+        text-align: center;
+        font-size: 2.4rem;
+        font-weight: 700;
+        margin-bottom: 40px;
+      }
+
+      .filters {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .filters .btn {
+        margin: 4px 6px;
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .filters .btn.active,
+      .filters .btn:hover {
+        background: var(--accent);
+        color: #0b1020;
+      }
+      .project-card {
+        background: var(--card-bg);
+        backdrop-filter: saturate(180%) blur(12px);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease,
+          border-color 0.25s ease;
+      }
+      .project-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 40px rgba(0, 229, 255, 0.08),
+          0 8px 24px rgba(255, 61, 129, 0.06);
+        border-color: rgba(0, 229, 255, 0.4);
+      }
+      .project-thumb {
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+      }
+      .project-body {
+        padding: 16px;
+      }
+      .project-tags .badge {
+        margin-right: 8px;
+      }
+      .hidden {
+        display: none !important;
+      }
+
+      /* VIDEOS */
+      #skills {
+        padding: 80px 0;
+        background: var(--section-bg);
+      }
+      #skills h2 {
+        text-align: center;
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+      }
+      .skill-badge {
+        display: inline-block;
+        margin: 8px;
+        padding: 10px 14px;
+        border-radius: 30px;
+        background: #eef2ff;
+        color: #0d6efd;
+        font-weight: 600;
+      }
+      [data-theme="dark"] .skill-badge {
+        background: #1f2937;
+        color: #93c5fd;
+      }
+
+      #videos {
+        padding: 80px 0;
+        background: var(--section-bg);
+      }
+
+      #videos h2 {
+        text-align: center;
+        font-size: 2.4rem;
+        margin-bottom: 40px;
+        font-weight: 700;
+      }
+
+      .video-card iframe {
+        border-radius: 12px;
+        width: 100%;
+        height: 250px;
+      }
+      #experiencia {
+        padding: 80px 0;
+        background: var(--section-bg);
+      }
+      #experiencia h2 {
+        text-align: center;
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 30px;
+      }
+      .timeline {
+        position: relative;
+        margin: 0 auto;
+        max-width: 860px;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 24px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(180deg, var(--accent), transparent);
+      }
+      .timeline-item {
+        position: relative;
+        margin-left: 60px;
+        margin-bottom: 24px;
+        padding: 16px 16px;
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        background: var(--card-bg);
+        backdrop-filter: blur(10px) saturate(140%);
+      }
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -36px;
+        top: 16px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+      }
+      .timeline-item h5 {
+        margin: 0 0 6px;
+        font-weight: 700;
+      }
+      .timeline-item .time {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+
+      #contato {
+        padding: 80px 0;
+        background: var(--section-bg);
+      }
+      #contato h2 {
+        text-align: center;
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+      .contact-card {
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        background: var(--card-bg);
+        backdrop-filter: blur(12px) saturate(160%);
+      }
+      .contact-card .form-control {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--card-border);
+        color: var(--text-color);
+      }
+      .contact-card .form-control::placeholder {
+        color: #9fb3c8;
+      }
+      .contact-card .btn {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .contact-card .btn:hover {
+        background: var(--accent);
+        color: #0b1020;
+      }
+
+      footer {
+        text-align: center;
+        padding: 15px;
+        background: var(--footer-bg);
+        color: var(--footer-text);
+        border-top: 1px solid var(--card-border);
+      }
+
+      /* Animation */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-16px);
+        }
+      }
+      @keyframes scan {
+        0% {
+          opacity: 0.2;
+          transform: translateX(-20%);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(20%);
+        }
+        100% {
+          opacity: 0.2;
+          transform: translateX(120%);
+        }
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: all 0.6s ease;
+      }
+      .reveal.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #contato {
+        background: linear-gradient(135deg, #6610f2, #0d6efd);
+        color: #fff;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .contato-icones a {
+        color: #fff;
+        font-size: 2rem;
+        margin: 0 15px;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      .contato-icones a:hover {
+        transform: scale(1.2);
+        color: #ffc107;
+      }
+
+      #btnTopo {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        background-color: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        padding: 5px 10px;
+        font-size: 1.25rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        display: none;
+      }
+
+      #btnTopo:hover {
+        transform: scale(1.1);
+        background-color: var(--accent-hover);
+      }
+
+      .navbar {
+        background: var(--navbar-bg);
+        backdrop-filter: blur(8px) saturate(120%);
+        border-bottom: 1px solid var(--card-border);
+      }
+
+      .navbar .navbar-brand,
+      .navbar .nav-link {
+        color: var(--navbar-text);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="#">Heithor Haber</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#sobre">Sobre mim</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#skills">Skills</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#experiencia">Experiência</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#projetos">Projetos</a>
+            </li>
+
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="#videos">Vídeos</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" href="#contato">Contato</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.apeti.org.br/"
+                target="_blank"
+                >APETI</a
+              >
+            </li> -->
+          </ul>
+          <button
+            id="themeToggle"
+            class="btn btn-outline-secondary ms-3"
+            type="button"
+          >
+            <i id="themeIcon" class="bi bi-sun"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+      <div class="shapes">
+        <div
+          class="shape"
+          style="width: 180px; height: 180px; top: 10%; left: 10%"
+        ></div>
+        <div
+          class="shape"
+          style="width: 220px; height: 220px; bottom: 15%; right: 15%"
+        ></div>
+      </div>
+      <h1 class="mb-3">
+        Olá, eu sou Heithor Haber<br /><span style="font-weight: 700"
+          >Desenvolvedor Web</span
+        >
+      </h1>
+      <p class="mb-4">
+        Minha trajetória em tecnologia, com foco em
+        experiências reais e aprendizado contínuo.
+      </p>
+      <!-- <div class="d-flex justify-content-center gap-2">
+        <a href="#projetos" class="btn btn-outline-light btn-acesso"
+          ><i class="bi bi-grid"></i> Ver Projetos</a
+        >
+        <a
+          href="galera_tech_sistema/login.php"
+          class="btn btn-warning btn-acesso"
+          ><i class="bi bi-box-arrow-in-right"></i> Acessar Sistema</a
+        >
+      </div> -->
+    </header>
+
+    <!-- Projeto GTECH -->
+    <!-- <section id="gtech">
+      <div class="container">
+        <h2>Sobre o Sistema Galera Tech</h2>
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-4 text-center">
+            <img
+              src="galera_tech_sistema/assets/img/logogt.png"
+              class="foto-perfil"
+              alt="Foto de Perfil"
+            />
+          </div>
+          <div class="col-md-6 mt-4 mt-md-0">
+            <p style="font-size: 1.15rem; line-height: 1.7">
+              O Sistema <strong> Galera Tech </strong>, foi desenvolvido para
+              facilitar e solucionar problemas administrativos e gestão dos
+              alunos. O usuário terá controle total sobre as pautas dos alunos,
+              com opções criadas e desenvolvidas para maior praticidade e
+              agilidade. Será controlado as frequências, advertências, cadastro
+              dos alunos, presenças, relatórios de aulas, gerenciamento de
+              escolas e várias outras ferramentas.<br />
+              Isso tudo em apenas um sistema único, uma verdadeira maleta de
+              utilidades e praticidades desenvolvidas para o dia a dia ao
+              usuário de gestão, sem precisar procurar recursos em sites
+              externos ou até mesmo papel e caneta, sistema 100% digital com
+              acesso ao Banco de Dados local armazenado no computador.
+              <br /><br />
+              Desenvolvido por aluno do galera tech
+              <strong> Heithor Haber</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- SOBRE MIM -->
+    <section id="sobre">
+      <div class="container">
+        <h2>Sobre mim</h2>
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-4 text-center">
+            <img src="pessoal.jpg" class="foto-perfil" alt="Foto de Perfil" />
+          </div>
+          <div class="col-md-6 mt-4 mt-md-0">
+            <p style="font-size: 1.15rem; line-height: 1.7">
+              Olá! Sou <strong> Heithor Haber </strong>tenho 17 anos, um desenvolvedor entusiasmado e comunicativo,
+              apaixonado por Tecnologia e Networking.<br><br>​ 🎓 Formação e
+              Habilidades:<br>​ Ensino Médio com habilitação técnica em Desenvolvimento de Sistemas
+              (E.E. Parque das Aroeiras 2).<br> ​Galera Tech (SENAC/APETI): Foco em
+              desenvolvimento de projetos e soluções.​ Minha base técnica inclui
+              PHP, SQL, HTML, CSS e JavaScript (JS).<br><br>​ 🏆 Conquistas:<br>​Vencedor do projeto de Gestão Escolar no curso Galera
+              Tech.​ Destaque na Apresentação do TCC do curso técnico, com o
+              desenvolvimento de um Sistema de E-commerce.​
+            </p>
+            <p style="font-size: 1.15rem; line-height: 1.7">
+              Aqui você encontrará meus principais projetos desenvolvidos
+              durante estudos e atividades práticas.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <h2 class="reveal">Skills</h2>
+        <div class="text-center reveal">
+          <span class="skill-badge"><i class="bi bi-code-slash"></i> HTML</span>
+          <span class="skill-badge"><i class="bi bi-braces"></i> CSS</span>
+          <span class="skill-badge"
+            ><i class="bi bi-lightning-charge"></i> JavaScript</span
+          >
+          <span class="skill-badge"><i class="bi bi-database"></i> SQL</span>
+          <span class="skill-badge"
+            ><i class="bi bi-filetype-php"></i> PHP</span
+          >
+          <span class="skill-badge"
+            ><i class="bi bi-bootstrap"></i> Bootstrap 5</span
+          >
+          <span class="skill-badge"><i class="bi bi-git"></i> Git</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiencia">
+      <div class="container">
+        <h2 class="reveal">Experiências</h2>
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <h5>Upgrade Tecnologia</h5>
+            <div class="time">fev 2024 - mai 2025</div>
+            <p class="mb-0">
+              Montagem e manutenção de computadores e notebooks, suporte
+              técnico.
+            </p>
+            <p>Auxilio na gestão de vendas e atendimento.</p>
+          </div>
+          <!-- <div class="timeline-item reveal">
+            <h5>Galera Tech (APETI)</h5>
+            <div class="time">Atual</div>
+            <p class="mb-0">
+              Desenvolvimento de projetos, gestão de conteúdos no Instagram do
+              projeto, estudo contínuo.
+            </p>
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETOS -->
+    <section id="projetos">
+      <div class="container">
+        <h2 class="reveal">Projetos</h2>
+        <div class="row g-4">
+          <div class="col-md-4 reveal">
+            <div class="project-card">
+              <img
+                class="project-thumb"
+                src="https://midias.inforchannel.com.br/wp-content/uploads/2020/09/a89dc8da-bot-1024x482.jpg"
+                alt="Projeto Chatbot"
+              />
+              <div class="project-body">
+                <h5 class="mb-1">Responsividades em ChatBot</h5>
+                <p class="small mb-2">
+                  Layout responsivo inspirado em apps de IA.
+                </p>
+                <div class="project-tags mb-3">
+                  <span class="badge bg-primary">Web</span>
+                  <span class="badge bg-secondary">Responsivo</span>
+                </div>
+                <a
+                  href="https://heithordev.github.io/resposividade_sites_de_IA/"
+                  target="_blank"
+                  class="btn btn-sm btn-primary"
+                  ><i class="bi bi-box-arrow-up-right"></i> Abrir</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 reveal">
+            <div class="project-card">
+              <img
+                class="project-thumb"
+                src="https://paolacarosella.com.br/cms/wp-content/uploads/2024/01/85_Bolo-de-laranja-Gateau-weekend-scaled.jpg"
+                alt="Projeto Receita"
+              />
+              <div class="project-body">
+                <h5 class="mb-1">Receita de Bolo em HTML</h5>
+                <p class="small mb-2">
+                  Fundamentos de HTML com semântica e estilos.
+                </p>
+                <div class="project-tags mb-3">
+                  <span class="badge bg-primary">Estudos</span>
+                  <span class="badge bg-secondary">HTML</span>
+                </div>
+                <a
+                  href="https://heithordev.github.io/BoloLaranja_GaleraTech/"
+                  target="_blank"
+                  class="btn btn-sm btn-primary"
+                  ><i class="bi bi-box-arrow-up-right"></i> Abrir</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 reveal">
+            <div class="project-card">
+              <img
+                class="project-thumb"
+                src="https://img.odcdn.com.br/wp-content/uploads/2025/03/pokemon-tipo-1920x1080.jpg"
+                alt="Projeto Cards"
+              />
+              <div class="project-body">
+                <h5 class="mb-1">Cards Responsivos</h5>
+                <p class="small mb-2">
+                  Componentes de UI com foco em responsividade.
+                </p>
+                <div class="project-tags mb-3">
+                  <span class="badge bg-primary">UI</span>
+                  <span class="badge bg-secondary">CSS</span>
+                </div>
+                <a
+                  href="https://heithordev.github.io/cardPokemon/"
+                  target="_blank"
+                  class="btn btn-sm btn-primary"
+                  ><i class="bi bi-box-arrow-up-right"></i> Abrir</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VÍDEOS -->
+    <!-- <section id="videos">
+      <div class="container">
+        <h2 class="reveal">Vídeos Criados</h2>
+
+        <div class="row g-4">
+          <div class="col-md-4 reveal">
+            <div class="video-card">
+              <iframe src="entrevista martinha.mp4" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="col-md-4 reveal">
+            <div class="video-card">
+              <iframe src="entrevista rodolfo.mp4" allowfullscreen></iframe>
+            </div>
+          </div>
+
+          <div class="col-md-4 reveal">
+            <div class="video-card">
+              <iframe src="metainsta.mp4" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <section id="contato">
+      <div class="container">
+        <h2 class="reveal">Mensagem Automática via WhatsApp</h2>
+        <p class="text-center text-muted reveal mb-3">
+          Preencha os campos e vamos abrir uma conversa no WhatsApp com a sua
+          mensagem.
+        </p>
+        <div class="contact-card reveal">
+          <form id="contactForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="cNome"
+                  placeholder="Seu nome"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">E-mail</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="cEmail"
+                  placeholder="voce@email.com"
+                />
+              </div>
+              <div class="col-12">
+                <label class="form-label">Mensagem</label>
+                <textarea
+                  class="form-control"
+                  id="cMsg"
+                  rows="4"
+                  placeholder="Escreva sua mensagem"
+                ></textarea>
+              </div>
+              <div class="col-12 text-end">
+                <button type="submit" class="btn btn-outline-primary">
+                  <i class="bi bi-whatsapp"></i> Enviar via WhatsApp
+                </button>
+              </div>
+            </div>
+          </form>
+          <div class="mt-3">
+            <a href="https://github.com/HeithorDev" target="_blank" class="me-2"
+              ><i class="bi bi-github"></i> GitHub</a
+            >
+            <a
+              href="https://www.instagram.com/heithor_haber"
+              target="_blank"
+              class="me-2"
+              ><i class="bi bi-instagram"></i> Instagram</a
+            >
+            <a href="https://www.linkedin.com/in/heithor-haber/" target="_blank"
+              ><i class="bi bi-linkedin"></i> LinkedIn</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <button
+      id="btnTopo"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' });"
+    >
+      <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <footer>Heithor Haber 2025©</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      const btnTopo = document.getElementById("btnTopo");
+      window.onscroll = () => {
+        if (document.documentElement.scrollTop > 400) {
+          btnTopo.style.display = "block";
+        } else {
+          btnTopo.style.display = "none";
+        }
+      };
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      function setTheme(t) {
+        document.documentElement.setAttribute("data-theme", t);
+        document.documentElement.setAttribute("data-bs-theme", t);
+        localStorage.setItem("theme", t);
+        if (themeIcon) {
+          themeIcon.className = t === "dark" ? "bi bi-moon" : "bi bi-sun";
+        }
+      }
+      document.addEventListener("DOMContentLoaded", function () {
+        var current =
+          document.documentElement.getAttribute("data-theme") || "light";
+        setTheme(current);
+      });
+      if (themeToggle) {
+        themeToggle.addEventListener("click", function () {
+          var current =
+            document.documentElement.getAttribute("data-theme") === "dark"
+              ? "dark"
+              : "light";
+          setTheme(current === "dark" ? "light" : "dark");
+        });
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("show");
+          });
+        },
+        { threshold: 0.2 }
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      const contactForm = document.getElementById("contactForm");
+      if (contactForm) {
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const nome = document.getElementById("cNome").value.trim();
+          const email = document.getElementById("cEmail").value.trim();
+          const msg = document.getElementById("cMsg").value.trim();
+          const text = encodeURIComponent(
+            `Olá, sou ${nome}. Meu e-mail é ${email}.\n\n${msg}`
+          );
+          window.open(`https://wa.me/17991205893?text=${text}`, "_blank");
+        });
+      }
+    </script>
+  </body>
+</html>
