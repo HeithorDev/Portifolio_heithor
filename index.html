@@ -419,6 +419,26 @@
         margin-bottom: 8px;
         color: var(--text-color);
       }
+      #certModal .modal-content {
+        background: var(--section-bg);
+        color: var(--text-color);
+      }
+      #certModalImg {
+        max-height: 80vh;
+        width: 100%;
+        object-fit: contain;
+      }
+      .cert-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      #certPrev {
+        left: 16px;
+      }
+      #certNext {
+        right: 16px;
+      }
 
       #contato {
         padding: 80px 0;
@@ -701,11 +721,11 @@
             <p style="font-size: 1.15rem; line-height: 1.7">
               Olá! Sou <strong> Heithor Haber </strong>tenho 17 anos, um desenvolvedor entusiasmado e comunicativo,
               apaixonado por Tecnologia e Networking.<br><br>​ 🎓 Formação e
-              Habilidades:<br>​ Ensino Médio com habilitação técnica em Desenvolvimento de Sistemas
-              (E.E. Parque das Aroeiras 2).<br> ​Galera Tech (SENAC/APETI): Foco em
+              Habilidades:<br>​Ensino Médio com habilitação técnica em Desenvolvimento de Sistemas
+              (E.E. Parque das Aroeiras 2).<br>​Galera Tech: Foco em
               desenvolvimento de projetos e soluções.​ Minha base técnica inclui
-              PHP, SQL, HTML, CSS e JavaScript (JS).<br><br>​ 🏆 Conquistas:<br>​Vencedor do projeto de Gestão Escolar no curso Galera
-              Tech.​ Destaque na Apresentação do TCC do curso técnico, com o
+              PHP, SQL, HTML, CSS e JS<br>(SENAC/APETI).<br><br>​ 🏆 Conquistas:<br>​Vencedor do projeto de Gestão Escolar no curso Galera
+              Tech.<br>​Destaque na Apresentação do TCC do curso técnico, com o
               desenvolvimento de um Sistema de E-commerce.​
             </p>
             <p style="font-size: 1.15rem; line-height: 1.7">
@@ -817,20 +837,20 @@
             <div class="project-card">
               <img
                 class="project-thumb"
-                src="https://midias.inforchannel.com.br/wp-content/uploads/2020/09/a89dc8da-bot-1024x482.jpg"
+                src="catalogo informatica.png"
                 alt="Projeto Chatbot"
               />
               <div class="project-body">
-                <h5 class="mb-1">Responsividades em ChatBot</h5>
+                <h5 class="mb-1">Catálogo online para loja de Informática</h5>
                 <p class="small mb-2">
-                  Layout responsivo inspirado em apps de IA.
+                  Layout responsivo para acelerar vendas online.
                 </p>
                 <div class="project-tags mb-3">
                   <span class="badge bg-primary">Web</span>
                   <span class="badge bg-secondary">Responsivo</span>
                 </div>
                 <a
-                  href="https://heithordev.github.io/resposividade_sites_de_IA/"
+                  href="https://heithordev.github.io/Pixel-Tech/"
                   target="_blank"
                   class="btn btn-sm btn-primary"
                   ><i class="bi bi-box-arrow-up-right"></i> Abrir</a
@@ -842,20 +862,20 @@
             <div class="project-card">
               <img
                 class="project-thumb"
-                src="https://paolacarosella.com.br/cms/wp-content/uploads/2024/01/85_Bolo-de-laranja-Gateau-weekend-scaled.jpg"
+                src="galera tech.png"
                 alt="Projeto Receita"
               />
               <div class="project-body">
-                <h5 class="mb-1">Receita de Bolo em HTML</h5>
+                <h5 class="mb-1">Sistema de Gestão Escolar</h5>
                 <p class="small mb-2">
-                  Fundamentos de HTML com semântica e estilos.
+                  Projeto Vencedor da turma do Galera Tech - T2-2025.
                 </p>
                 <div class="project-tags mb-3">
-                  <span class="badge bg-primary">Estudos</span>
-                  <span class="badge bg-secondary">HTML</span>
+                  <span class="badge bg-primary">PHP</span>
+                  <span class="badge bg-secondary">Servidor MySQL</span>
                 </div>
                 <a
-                  href="https://heithordev.github.io/BoloLaranja_GaleraTech/"
+                  href="https://github.com/HeithorDev/Projeto-Galera-Tech"
                   target="_blank"
                   class="btn btn-sm btn-primary"
                   ><i class="bi bi-box-arrow-up-right"></i> Abrir</a
@@ -988,6 +1008,26 @@
       <i class="bi bi-arrow-up"></i>
     </button>
 
+    <div class="modal fade" id="certModal" tabindex="-1">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div id="certModalCaption" class="fw-bold"></div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body position-relative text-center">
+            <img id="certModalImg" src="" alt="Certificado" />
+            <button id="certPrev" class="btn btn-outline-secondary cert-nav position-absolute">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            <button id="certNext" class="btn btn-outline-secondary cert-nav position-absolute">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <footer>Heithor Haber 2025©</footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -1049,6 +1089,54 @@
             `Olá, sou ${nome}. Meu e-mail é ${email}.\n\n${msg}`
           );
           window.open(`https://wa.me/17991205893?text=${text}`, "_blank");
+        });
+      }
+
+      const certItems = Array.from(
+        document.querySelectorAll("#certificados .col-md-4")
+      );
+      const certData = certItems.map((item) => {
+        const link = item.querySelector("a");
+        const titleEl = item.querySelector(".cert-title");
+        return {
+          src: link ? link.getAttribute("href") : "",
+          title: titleEl ? titleEl.textContent : "",
+        };
+      });
+      const certModalEl = document.getElementById("certModal");
+      const certModalImg = document.getElementById("certModalImg");
+      const certModalCaption = document.getElementById("certModalCaption");
+      const certModal = new bootstrap.Modal(certModalEl);
+      let certIndex = 0;
+      function renderCert() {
+        const d = certData[certIndex];
+        if (!d) return;
+        certModalImg.src = d.src;
+        certModalCaption.textContent = d.title || "";
+      }
+      certItems.forEach((item, idx) => {
+        const link = item.querySelector("a");
+        if (link) {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            certIndex = idx;
+            renderCert();
+            certModal.show();
+          });
+        }
+      });
+      const btnPrev = document.getElementById("certPrev");
+      const btnNext = document.getElementById("certNext");
+      if (btnPrev) {
+        btnPrev.addEventListener("click", function () {
+          certIndex = (certIndex - 1 + certData.length) % certData.length;
+          renderCert();
+        });
+      }
+      if (btnNext) {
+        btnNext.addEventListener("click", function () {
+          certIndex = (certIndex + 1) % certData.length;
+          renderCert();
         });
       }
     </script>
